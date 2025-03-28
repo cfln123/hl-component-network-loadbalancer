@@ -52,7 +52,7 @@ CloudFormation do
 
     ElasticLoadBalancingV2_TargetGroup("#{tg_name}TargetGroup") {
       VpcId Ref(:VPCId)
-      Protocol 'TCP'
+      Protocol params['protocol'] if params.has_key?('protocol') else 'TCP'
       Port params['port']
 
       TargetType params['type'] if params.has_key?('type')
